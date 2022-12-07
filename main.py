@@ -15,6 +15,7 @@ RESULTS = []
 PART_ID = ""
 KEY_TRANSLATOR = {"comma": ".", "period": "."}
 
+
 @atexit.register
 def save_beh_results():
     num = random.randint(100, 999)
@@ -62,6 +63,7 @@ def check_isdigit(text):
 
 def block(config, images, block_type, win, fixation, clock, screen_res, answers, answers_buttons, mouse, feedback,
           extra_text, clock_image, timer):
+    # show_image(win, join('.', 'messages', 'instruction.png'), list(screen_res.values()))
     show_info(win, join('.', 'messages', f'instruction_{block_type}.txt'), text_color=config["text_color"],
               text_size=config["text_size"], screen_res=screen_res)
 
@@ -232,7 +234,7 @@ def main():
     # load data and prepare trials
     answers = pd.read_csv(join("images", "answers.csv"))
 
-    training_images, experimental_images = load_images(do_training= config["do_training"],
+    training_images, experimental_images = load_images(do_training=config["do_training"],
                                                        randomize=config["randomize_trails"])
     training_images = prepare_block_stimulus(training_images, win, config, folder="training")
     experimental_images = prepare_block_stimulus(experimental_images, win, config, folder="experiment")
