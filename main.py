@@ -165,8 +165,11 @@ def block(config, images, block_type, win, fixation, clock, screen_res, answers,
             correct_answer.sort()
             answer.sort()
         else:
-            correct_answer = str(answers.loc[(answers['item_type'] == block_type) &
+            correct_answer = float(answers.loc[(answers['item_type'] == block_type) &
                                              (answers['item_id'] == trial["image_ID"])]['answer'].iloc[0])
+            if answer:
+                answer = float("".join(answer))
+
         if answer:
             acc = 1 if answer == correct_answer else 0
         trial_results = {"n": n, "block_type": block_type,
